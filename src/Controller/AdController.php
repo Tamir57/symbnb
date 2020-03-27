@@ -40,7 +40,7 @@ class AdController extends AbstractController
      */
     public function create(Request $request, EntityManagerInterface $manager) {
         $ad = new Ad();
-
+        
         $form = $this->createForm(AdType::class, $ad);
 
         /* récupérer information formulaire 
@@ -59,6 +59,9 @@ class AdController extends AbstractController
                 $image->setAd($ad);
                 $manager->persist($image);
             }
+
+            //assigné une annonce a un utilisateur
+            $ad->setAuthor($this->getUser());
 
             $manager->persist($ad);
             $manager->flush();
@@ -146,6 +149,5 @@ class AdController extends AbstractController
             'ad' => $ad
         ]);
     }
-
 
 }
