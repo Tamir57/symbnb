@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vous n'avez pas le droit {% endblock %}
+
+{% block body %}
+{# _error/403 #}
+<div class="container">
+    <h1>Vous n'avez pas le droit !!</h1>
+    <p>bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla</p>
+
+    <a href="{{ path('homepage') }}" class='btn btn-primary'>Retour à l'accueil</a>
+   {#  {{dump() }} #}
+</div>
+
+{% endblock %}
