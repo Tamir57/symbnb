@@ -32,7 +32,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for comment in comments %}
+                {% for comment in pagination.getData %}
                 <tr>
                     <td>{{comment.id}}</td>
                     <td>{{comment.createdAt|date('d/m/Y H:i')}}</td>
@@ -54,6 +54,30 @@
                 {% endfor %}
             </tbody>
         </table>
+
+        {# pour l'utiliser il faut enlever les deux set du templace twig admin/partials/pagination.html.twig #}
+       {#  {{ pagination.display() }} #}
+
+         {% include "admin/partials/pagination.html.twig" with { 'route': 'admin_comment_index' }  %} 
+
+{#         <div>
+            <ul class="pagination">
+            {% set page = pagination.getPage  %}
+            {% set pages = pagination.getPages %}
+                <li class="page-item {% if page == 1 %} disabled {% endif %}">
+                <a class="page-link" href="{{ path('admin_comment_index', {'page': page - 1}) }}">&laquo;</a>
+                </li>
+                {% for i in 1..pages %}
+                <li class="page-item {% if page == i %} active {% endif %}">
+                <a class="page-link" href="{{ path('admin_comment_index', {'page': i}) }}">{{ i }}</a>
+                </li>
+                {% endfor %}
+                <li class="page-item {% if page == pages %} disabled {% endif %}">
+                <a class="page-link" href="{{ path('admin_comment_index', {'page': page + 1}) }}">&raquo;</a>
+                </li>
+            </ul>
+        </div> #}
+
 
     </div>
 {% endblock %}

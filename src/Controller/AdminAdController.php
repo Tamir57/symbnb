@@ -17,12 +17,43 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class AdminAdController extends AbstractController
 {
     /**
-     * @Route("/admin/ads", name="admin_ads_index")
+     * Route("/admin/ads/{page<\d+>1}", name="admin_ads_index")  ET dans ce cas dans la function index nous pouvons supprimer $page=1
+     * @Route("/admin/ads/{page}", name="admin_ads_index", requirements={"page": "\d+"})
      */
-    public function index(AdRepository $repo)
+    public function index(AdRepository $repo, $page = 1)
     {
+        // Méthode find : permet de retrouver un enregistrement par son identifiant
+       /*  $ad = $repo->find(380); */
+
+       //on peut ajouter plusieur filtre
+       //un resultat
+/*         $ad = $repo->findOneBy([
+             "author" => 92 
+        ]); */
+
+  /*       dump($ad); */
+
+        //plusieur resultat
+/*         $ads = $repo->findBy([
+             'id' => 380 
+            "author" => 92
+             "title" => "Voluptatem vel est est." 
+        ]); */
+
+/*         $ads = $repo->findBy([], [], 5, 0);
+
+        dump($ads); */
+
+        //METHODE SANS SERVICE, LA METHODE AVEC SERVICE EST DANS ADMINADCONTROLLER OU ADMINCOMMENTCONTROLLER
+        $limit = 10;
+        $start = $page * $limit - $limit;
+        $total = Count($repo->findAll());
+        $pages = ceil($total / $limit);
+
         return $this->render('admin/ad/index.html.twig', [
-            'ads' => $repo->findAll()
+            'ads' => $repo->findBy([],[],$limit,$start),
+            'pages' => $pages,
+            'page' => $page
         ]);
     }
 
