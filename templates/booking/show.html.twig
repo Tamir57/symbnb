@@ -66,11 +66,11 @@
 
                     <a href="{{ path("user_show", {'slug': author.slug}) }}" class="btn btn-primary">Plus d'infos sur {{author.firstName}}</a>
                 </div>
-{# 
+
                 <div class="alert alert-light" id="comment">
                     <h2 class="alert-heading">Votre avis compte !</h2>
                     {% if date() > date(booking.endDate) %}
-                        {% set comment = booking.ad.commentFromAuthor(app.user) %}
+                        {% set comment = booking.ad.getcommentFromAuthor(app.user) %}
                         {% if comment is not null %}
                             <blockquote>
                                 {{comment.content}}
@@ -82,12 +82,12 @@
                             {{ form_widget(form) }}
                             <button type="submit" class="btn btn-success">Confirmer !</button>
                             {{ form_end(form) }}
-                        {% endif %}
+                        {% endif %} 
 
                     {% else %}
                         <p>Vous ne pourrez pas noter cette annonce tant que votre voyage ne sera pas complet !</p>
                     {% endif %}
-                </div> #}
+                </div>
             </div> 
              <div class="col">
                 <div class="alert alert-light">

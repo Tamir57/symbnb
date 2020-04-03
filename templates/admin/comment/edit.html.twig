@@ -1,0 +1,50 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration des commentaires{% endblock %}
+
+
+
+{% block body %}
+ {# read and display all flash messages #}
+ <div class="container">
+  {% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="text-center alert alert-{{ label }}">
+            {{ message | raw }}
+           {#  {{comment.author.fullName}} #}
+        </div>
+    {% endfor %}
+{% endfor %} 
+ </div>
+
+    <div class="container">
+        <h1 class="my-5">Modification du commentaire n° {{comment.id}}</h1>
+
+        <div class="alert alert-info">
+            <strong>Annonce liée : </strong> {{comment.ad.title}}<br>
+            <strong>Auteur : </strong> {{comment.author.fullName}}<br>
+            <strong>Date de création : </strong> {{comment.createdAt|date('d/m/Y H:i')}} <br>
+            <strong>Note donnée : </strong>{{comment.rating}}
+        </div>
+
+        {{ form_start(form) }}
+
+        {{ form_widget(form) }}
+      {#   {{ form_widget(comment.content) }} #}
+
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-check"></i>
+            Enregistrer les modifications
+        </button>
+
+        {{ form_end(form) }}
+    </div>
+
+
+{% endblock %}
+
+
+
+{% block javascripts %}
+
+{% endblock %}
