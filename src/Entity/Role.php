@@ -24,7 +24,9 @@ class Role
     private $title;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="userRoles")
+     * ManyToMany(targetEntity="App\Entity\User", inversedBy="userRoles")
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="userRoles")
+     * 
      */
     private $users;
 

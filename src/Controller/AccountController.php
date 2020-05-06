@@ -71,6 +71,16 @@ class AccountController extends AbstractController
             $hash = $encoder->encodePassword($user, $user->getHash());
             $user->setHash($hash);
 
+            /*             $article->getCouleurs()->add($couleur);  
+            $couleur->getCouleur()->add($article);   
+            $couleur->setNomCouleur("test");   */
+
+           /*  $manager->persist($couleur); */
+
+
+           $test = $user->getUserRoles();
+           dump($test);
+
             $manager->persist($user);
             $manager->flush();
 
@@ -79,7 +89,7 @@ class AccountController extends AbstractController
                 "Votre compte bien été créer"
             );
 
-            return $this->redirectToRoute('account_login');
+            //return $this->redirectToRoute('account_login');
         }
 
         return $this->render('account/registration.html.twig', [

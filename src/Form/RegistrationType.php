@@ -2,10 +2,12 @@
 
 namespace App\Form;
 
+use App\Entity\Role;
 use App\Entity\User;
 use App\Form\ApplicationType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -27,7 +29,12 @@ class RegistrationType extends ApplicationType
         ->add('passwordConfirm', PasswordType::class, $this->getConfiguration("Confirmation mot de passe", "Choisissez un bon mot de passe !"))
         ->add('introduction', TextType::class, $this->getConfiguration("Introduction", "Présentez vous en quelques mots ..."))
         ->add('description', TextareaType::class, $this->getConfiguration("Description détaillée", "C'est le moment de vous présenter en détails !"))
-        ;
+        ->add('userRoles', EntityType::class, [
+            'class' => Role::class,
+            'choice_label' => 'title',
+            'multiple' => true,
+            'expanded' => true,
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

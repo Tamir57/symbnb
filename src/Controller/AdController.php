@@ -61,6 +61,7 @@ class AdController extends AbstractController
             $manager = $this->getDoctrine()->getManager(); */
 
             foreach($ad->getImages() as $image) {
+                dump($image);
                 $image->setAd($ad);
                 $manager->persist($image);
             }
@@ -76,9 +77,9 @@ class AdController extends AbstractController
                 "L'annonce <strong>{$ad->getTitle()}</strong> a bien été enregistrée !"
             );
 
-            return $this->redirectToRoute('ads_show',[
+            /* return $this->redirectToRoute('ads_show',[
                 'slug' => $ad->getSlug()
-            ]);
+            ]); */
         }
 
         return $this->render('ad/new.html.twig', [
